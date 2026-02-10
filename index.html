@@ -1,108 +1,215 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>XMAXPRO MOTOS | MAX PRO</title>
-  <style>
-    body { margin:0; font-family: Arial, Helvetica, sans-serif; background:#111; color:#eee; }
-    header { background:linear-gradient(90deg,#000,#1a1a1a); color:#fff; padding:15px 25px; display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid #e10600; }
-    header h1 { margin:0; font-size:24px; display:flex; align-items:center; }
-    header span { color:#e10600; margin-left:8px; }
-    header a { background:#e10600; color:#fff; padding:10px 16px; text-decoration:none; border-radius:6px; font-weight:bold; }
-    .hero { display:grid; grid-template-columns:1fr 1fr; gap:30px; padding:50px 25px; background:#1a1a1a; }
-    .hero h2 { font-size:36px; margin-bottom:15px; color:#fff; }
-    .hero p { font-size:18px; margin-bottom:20px; color:#ccc; }
-    .btn { background:#e10600; color:#fff; padding:12px 20px; text-decoration:none; border-radius:6px; font-weight:bold; }
-    .hero img { width:100%; border-radius:16px; border:3px solid #e10600; }
-    .section { padding:40px 25px; background:#111; }
-    .section h3 { text-align:center; font-size:30px; margin-bottom:30px; color:#fff; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:20px; }
-    .card { background:#1e1e1e; padding:25px; border-radius:16px; box-shadow:0 5px 15px rgba(0,0,0,0.6); text-align:center; border:1px solid #2a2a2a; }
-    .card h4 { margin-top:10px; color:#e10600; }
-    .card p { color:#ccc; }
-    footer { background:#000; color:#aaa; text-align:center; padding:20px; border-top:3px solid #e10600; }
-    /* Botón WhatsApp flotante */
-    .whatsapp-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background:#25D366;
-      color:#fff;
-      border-radius:50%;
-      width:60px;
-      height:60px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      text-decoration:none;
-      font-size:30px;
-      box-shadow:0 5px 15px rgba(0,0,0,0.3);
-      z-index:1000;
-    }
-    @media(max-width:768px){ .hero{grid-template-columns:1fr;} }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maxpro Motos</title>
+
+<style>
+body{
+  font-family:Arial,sans-serif;
+  margin:0;
+  padding:0;
+  background-image:url("images/imagen1.jpg");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  color:white;
+}
+
+.overlay{
+  background-color:rgba(0,0,0,0.6);
+  min-height:100vh;
+  padding:20px;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 30px;
+  background-color:rgba(0,0,0,0.7);
+}
+
+header h1{margin:0;color:#ff5722;}
+
+.cart{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+}
+
+.cart img{width:40px;}
+
+section h2{
+  text-align:center;
+  color:#ff5722;
+  margin:40px 0 20px;
+}
+
+.products-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.product-card{
+  background:rgba(255,255,255,0.1);
+  border-radius:10px;
+  padding:15px;
+  text-align:center;
+}
+
+.product-card img{
+  width:100%;
+  border-radius:10px;
+}
+
+.product-card button{
+  margin-top:10px;
+  padding:10px;
+  background:#ff5722;
+  border:none;
+  border-radius:5px;
+  color:white;
+  cursor:pointer;
+}
+
+/* ===== Carrito ===== */
+#carritoPanel{
+  background:rgba(0,0,0,0.85);
+  padding:20px;
+  margin-top:40px;
+  border-radius:10px;
+}
+
+#listaCarrito li{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:8px;
+}
+
+.total{
+  font-size:1.2em;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+.whatsapp{
+  display:block;
+  margin-top:20px;
+  padding:12px;
+  background:#25D366;
+  color:white;
+  text-align:center;
+  text-decoration:none;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+footer{
+  margin-top:40px;
+  background:rgba(0,0,0,0.7);
+  padding:15px;
+  text-align:center;
+}
+</style>
 </head>
+
 <body>
+<div class="overlay">
 
 <header>
-  <h1>
-    <img src="logo-maxpro.jpg" alt="MAXPRO MOTOS" style="height:40px; vertical-align:middle;">
-    <span>MOTOS</span>
-  </h1>
-  <a href="#productos">Catálogo</a>
+  <h1>Maxpro Motos</h1>
+  <div class="cart">
+    <img src="images/carrito.png">
+    <span id="contador">0</span>
+  </div>
 </header>
 
-<section class="hero">
-  <div>
-    <h2>Repuestos y Accesorios para Moto</h2>
-    <p>En MAX PRO encuentras repuestos, accesorios y todo lo necesario para tu moto con calidad garantizada y precios justos.</p>
-    <a class="btn" href="https://wa.me/573196416617" target="_blank">Comprar por WhatsApp</a>
+<main>
+
+<section>
+<h2>Productos</h2>
+<div class="products-grid">
+
+  <div class="product-card">
+    <img src="images/amortiguadores1.jpg">
+    <h3>Amortiguador 1</h3>
+    <p>$120</p>
+    <button onclick="agregar('Amortiguador 1',120)">Agregar</button>
   </div>
-  <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6" alt="Moto real">
+
+  <div class="product-card">
+    <img src="images/amortiguadores2.jpg">
+    <h3>Amortiguador 2</h3>
+    <p>$140</p>
+    <button onclick="agregar('Amortiguador 2',140)">Agregar</button>
+  </div>
+
+  <div class="product-card">
+    <img src="images/amortiguadores3.jpg">
+    <h3>Amortiguador 3</h3>
+    <p>$160</p>
+    <button onclick="agregar('Amortiguador 3',160)">Agregar</button>
+  </div>
+
+</div>
 </section>
 
-<section class="section" id="productos">
-  <h3>Nuestros Productos</h3>
-  <div class="grid">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1606813908386-cae6f15ff0a0" alt="Pastillas de freno" style="width:100%; border-radius:12px;">
-      <h4>Repuestos</h4>
-      <p>Pastillas, cadenas, frenos, kits y más.</p>
-    </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1620132910361-89c9ee8f89f8" alt="Accesorios moto" style="width:100%; border-radius:12px;">
-      <h4>Accesorios</h4>
-      <p>Espejos, sliders, parrillas y decoración.</p>
-    </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1604014238673-0d19c4c7b7c6" alt="Aceite moto" style="width:100%; border-radius:12px;">
-      <h4>Lubricantes</h4>
-      <p>Aceites y líquidos para alto rendimiento.</p>
-    </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1558981359-1503e8f5c3fa" alt="Casco moto" style="width:100%; border-radius:12px;">
-      <h4>Cascos</h4>
-      <p>Seguridad y estilo para cada recorrido.</p>
-    </div>
-  </div>
+<section id="carritoPanel">
+<h2>Tu carrito</h2>
+<ul id="listaCarrito"></ul>
+<div class="total">Total: $<span id="total">0</span></div>
+
+<a id="whatsappBtn" class="whatsapp" target="_blank">
+  Enviar pedido por WhatsApp
+</a>
 </section>
 
-<!-- Botón WhatsApp flotante -->
-<a href="https://wa.me/573196416617" class="whatsapp-btn" target="_blank">💬</a>
+</main>
 
 <footer>
-  <p>© 2026 XMAXPRO MOTOS · MAX PRO</p>
-  <p>📍 Medellín, Colombia</p>
-  <p>📞 WhatsApp: 319 641 6617</p>
-  <p>✉️ Correo: maxpro@gmail.com</p>
+Calle 7p #45-05 · 2026 Maxpro Motos
 </footer>
+
+</div>
+
+<script>
+let carrito=[];
+let total=0;
+
+function agregar(nombre,precio){
+  carrito.push({nombre,precio});
+  total+=precio;
+  actualizar();
+}
+
+function actualizar(){
+  document.getElementById("contador").innerText=carrito.length;
+  document.getElementById("total").innerText=total;
+
+  const lista=document.getElementById("listaCarrito");
+  lista.innerHTML="";
+  carrito.forEach(p=>{
+    const li=document.createElement("li");
+    li.innerHTML=${p.nombre} <span>$${p.precio}</span>;
+    lista.appendChild(li);
+  });
+
+  const texto=carrito.map(p=>${p.nombre} - $${p.precio}).join("%0A");
+  document.getElementById("whatsappBtn").href=
+    https://wa.me/573000000000?text=Pedido:%0A${texto}%0ATotal: $${total};
+}
+</script>
 
 </body>
 </html>
 
   
     
+
 
 
 
